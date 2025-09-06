@@ -1,0 +1,300 @@
+/* Importar Tailwind CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Importar fuente Inter desde Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap');
+
+/* Variables CSS personalizadas para Altura Creativa */
+:root {
+  --color-primary: #E84855;
+  --color-primary-dark: #dc2626;
+  --color-primary-light: #fecaca;
+  --color-secondary: #E5E5E5;
+  --color-dark: #333232;
+  --color-neutral: #737373;
+  --color-success: #10b981;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
+  --color-info: #3b82f6;
+  
+  /* Espaciado consistente */
+  --spacing-xs: 0.25rem;    /* 4px */
+  --spacing-sm: 0.5rem;     /* 8px */
+  --spacing-md: 1rem;       /* 16px */
+  --spacing-lg: 1.5rem;     /* 24px */
+  --spacing-xl: 2rem;       /* 32px */
+  --spacing-2xl: 3rem;      /* 48px */
+  --spacing-3xl: 4rem;      /* 64px */
+  
+  /* Bordes redondeados */
+  --radius-sm: 0.25rem;     /* 4px */
+  --radius-md: 0.5rem;      /* 8px */
+  --radius-lg: 0.75rem;     /* 12px */
+  --radius-xl: 1rem;        /* 16px */
+  
+  /* Sombras */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-primary: 0 4px 25px -5px rgba(232, 72, 85, 0.3);
+  
+  /* Z-index system */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-toast: 1080;
+}
+
+/* Estilos base personalizados */
+@layer base {
+  /* Reset mejorado */
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    tab-size: 4;
+  }
+
+  body {
+    @apply text-neutral-900 bg-white leading-relaxed;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Tipografía mejorada */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold leading-tight;
+    color: var(--color-dark);
+  }
+
+  h1 { @apply text-4xl md:text-5xl lg:text-6xl; }
+  h2 { @apply text-3xl md:text-4xl lg:text-5xl; }
+  h3 { @apply text-2xl md:text-3xl; }
+  h4 { @apply text-xl md:text-2xl; }
+  h5 { @apply text-lg md:text-xl; }
+  h6 { @apply text-base md:text-lg; }
+
+  p {
+    @apply leading-7 text-neutral-700;
+  }
+
+  /* Enlaces */
+  a {
+    @apply transition-colors duration-200;
+    text-decoration: none;
+  }
+
+  a:hover {
+    @apply text-primary-600;
+  }
+
+  /* Botones base */
+  button {
+    @apply transition-all duration-200 cursor-pointer;
+    font-feature-settings: inherit;
+  }
+
+  button:disabled {
+    @apply cursor-not-allowed opacity-50;
+  }
+
+  /* Inputs base */
+  input, textarea, select {
+    font-feature-settings: inherit;
+  }
+
+  /* Imágenes responsivas por defecto */
+  img {
+    @apply max-w-full h-auto;
+  }
+
+  /* Focus visible mejorado */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+  }
+
+  /* Scroll suave para elementos internos */
+  * {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Componentes utilitarios personalizados */
+@layer components {
+  /* Container personalizado */
+  .container-custom {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Botones personalizados */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-primary-500 hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-all duration-200 shadow-md hover:shadow-lg active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 border border-neutral-300 text-base font-medium rounded-lg text-neutral-700 bg-white hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-all duration-200 shadow-sm hover:shadow-md active:scale-95;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-6 py-3 border border-primary-500 text-base font-medium rounded-lg text-primary-500 bg-transparent hover:bg-primary-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-all duration-200 active:scale-95;
+  }
+
+  /* Cards personalizadas */
+  .card {
+    @apply bg-white rounded-xl shadow-soft hover:shadow-medium transition-shadow duration-300 border border-neutral-100;
+  }
+
+  .card-hover {
+    @apply card hover:scale-105 cursor-pointer transition-transform duration-300;
+  }
+
+  /* Gradientes personalizados */
+  .gradient-primary {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  }
+
+  .gradient-secondary {
+    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-neutral) 100%);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Separadores */
+  .divider {
+    @apply w-full h-px bg-gradient-to-r from-transparent via-neutral-300 to-transparent;
+  }
+
+  /* Contenido centrado */
+  .center-content {
+    @apply flex items-center justify-center min-h-screen;
+  }
+
+  /* Grid responsive para servicios/productos */
+  .grid-responsive {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8;
+  }
+
+  /* Texto con límite de líneas */
+  .text-truncate-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .text-truncate-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Loading spinner */
+  .spinner {
+    @apply animate-spin rounded-full border-2 border-neutral-300 border-t-primary-500;
+  }
+}
+
+/* Utilidades personalizadas */
+@layer utilities {
+  /* Glassmorphism */
+  .glass {
+    @apply bg-white bg-opacity-20 backdrop-blur-md border border-white border-opacity-20;
+  }
+
+  /* Texto responsive */
+  .text-responsive {
+    @apply text-sm md:text-base lg:text-lg;
+  }
+
+  /* Espaciado responsive */
+  .space-y-responsive > * + * {
+    @apply mt-4 md:mt-6 lg:mt-8;
+  }
+
+  /* Animaciones personalizadas */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out;
+  }
+
+  /* Estados de hover mejorados */
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+  }
+
+  /* Bordes interactivos */
+  .border-interactive {
+    @apply border border-neutral-200 hover:border-primary-300 focus-within:border-primary-500 transition-colors duration-200;
+  }
+
+  /* Texto con gradiente */
+  .text-gradient {
+    @apply gradient-text bg-clip-text;
+  }
+}
+
+/* Mejoras para modo oscuro (futuro) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-dark: #f3f4f6;
+    --color-neutral: #d1d5db;
+  }
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    @apply text-black bg-white;
+  }
+  
+  a {
+    text-decoration: underline;
+  }
+}
