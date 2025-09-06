@@ -1,0 +1,118 @@
+---
+// src/layouts/BaseLayout.astro
+import { siteConfig } from '../config/site.js';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = siteConfig.name,
+  description = siteConfig.description,
+  image = '/og-image.jpg'
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- SEO Meta Tags -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.url)} />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={Astro.url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.url)} />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json" is:inline>
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Altura Creativa",
+        "description": "Agencia especializada en servicios integrales para empresas, marketing digital y rebranding",
+        "url": "https://alturacreativa.com",
+        "email": "david@alturacreativa.com",
+        "sameAs": [
+          "https://www.linkedin.com/company/altura-creativa",
+          "https://twitter.com/alturacreativa"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "ES",
+          "addressLocality": "Madrid"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+34-600-123-456",
+          "contactType": "Customer Service",
+          "email": "david@alturacreativa.com"
+        }
+      }
+    </script>
+  </head>
+  
+  <body class="bg-white text-dark antialiased">
+    <!-- Skip to content link for accessibility -->
+    <a 
+      href="#main-content" 
+      class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-primary text-white px-4 py-2 rounded-lg z-50 transition-all duration-200"
+    >
+      Ir al contenido principal
+    </a>
+    
+    <!-- Main content wrapper -->
+    <div class="min-h-screen flex flex-col">
+      <slot />
+    </div>
+    
+    <!-- Analytics placeholder -->
+    <!-- Add your analytics code here -->
+    
+    <!-- Performance optimization -->
+    <script is:inline>
+      // Lazy loading images fallback
+      if ('loading' in HTMLImageElement.prototype) {
+        const images = document.querySelectorAll('img[loading="lazy"]');
+        images.forEach(img => {
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+          }
+        });
+      } else {
+        // Fallback for older browsers
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js';
+        document.body.appendChild(script);
+      }
+    </script>
+  </body>
+</html>
